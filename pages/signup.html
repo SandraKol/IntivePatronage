@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <title>sign Up</title>
+</head>
+
+<body>
+    <div class="nav">
+        <button class="nav-button" onclick="goToLogin()">Logowanie</button>
+    </div>
+    <form id="signup-form">
+        <div class="container">
+            <h1 class="title">Rejestracja konta</h1>
+            <h4 class="subtitle">Zarejestruj się i zacznij monitorować swoje transakcje już teraz</h4>
+
+            <div class="input-container">
+                <label for="username-signup">Nazwa użytkownika</label>
+                <input type="text" class="input" id="username-signup" autofocus>
+                <div class="input-validation-error-message" id="signup-username-error"></div>
+            </div>
+            <div class="input-container">
+                <label for="password-signup">Hasło</label>
+                <input type="password" class="input" id="password-signup">
+                <div class="input-validation-error-message" id="signup-password-error"></div>
+            </div>
+            <div class="input-container">
+                <label for="email-signup">Email</label>
+                <input type="text" class="input" id="email-signup" autofocus placeholder="example@gmail.com">
+                <div class="input-validation-error-message" id="signup-email-error"></div>
+            </div>
+            <div class="input-container">
+                <label for="confirm-email-sign">Potwierdź email</label>
+                <input type="text" class="input" id="confirm-email-signup" autofocus placeholder="example@gmail.com">
+                <div class="input-validation-error-message" id="signup-email-error2"></div>
+            </div>
+
+            <button class="button-submit" type="submit" id="button-submit">Zarejestruj się! </button>
+
+            <p class="text">
+                <a href="../pages/login.html" class="login-text">Masz już konto? Zaloguj się tutaj!</a>
+            </p>
+        </div>
+    </form>
+    <script src="../signup.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:wght@300;400;600;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="/css/style.css">
+    <script src="https://kit.fontawesome.com/763359e09e.js" crossorigin="anonymous"></script>
+    <title>content</title>
+</head>
+
+<body>
+    <div class="nav">
+        <button class="nav-button" onclick="logout()">Wyloguj</button>
+        <p id="LoggedUsername"></p>
+    </div>
+    <div class="icons">
+        <i class="fa-solid fa-sack-dollar" id="transaction-2"></i>
+    </div>
+    <div class="table-container">
+        <table class="table">
+            <thead>
+            </thead>
+            <tbody></tbody>
+        </table>
+    </div>
+    <div>
+        <canvas id="doughnutChart" class="chart"></canvas>
+        <canvas id="barChart" class="chart"></canvas>
+    </div>
+    <div class="chart-container">
+
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+        <script src="../content.js"></script>
+    </div>
+</body>
+
+</html>
