@@ -21,17 +21,13 @@ for (let i = 0; i < localStorage.length; i++) {
     let value = JSON.parse(localStorage.getItem(key));
     registeredUsers.push(value);
 }
-console.log(registeredUsers);
-
 
 // -------------->Chech if given value is email format
 function ValidateEmail(input) {
     let validRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (input.match(validRegex)) {
-        console.log('this is email');
         return true;
     } else {
-        console.log('this must be login');
         return false;
     }
 }
@@ -44,11 +40,9 @@ const emailAvailability = (e) => {
 
     if (ValidateEmail(userLogin.value)) {
         if (localStorage.getItem(userLogin.value.toLowerCase()) !== null) {
-            console.log(`Email exists`);
             proceedWithEmail = true;
 
         } else {
-            console.log(`Email not found`);
             freeEmailMessage.innerText = "Podany adres email nie jest jeszcze zarejestrowany. Załóż konto już teraz!";
             passwordLogin.setAttribute('disabled', true);
             proceedWithEmail = false;
@@ -57,18 +51,14 @@ const emailAvailability = (e) => {
 }
 userLogin.addEventListener('change', emailAvailability);
 
-
 // ------------------------------------> Case: username as input. Check if username exists
 const checkLogin = (e) => {
     e.preventDefault();
     if (ValidateEmail(userLogin.value) == false) {
         userIndexLocalStorage = registeredUsers.findIndex(name => name.username == userLogin.value); // check if username exists in localstorage and return its index
-        console.log(userIndexLocalStorage);
 
         if (userIndexLocalStorage != -1) {
             proceedWithUsername = true;
-            console.log('z tym loginem mozna sie zalogowac');
-            console.log(registeredUsers[userIndexLocalStorage].password);
         }
         else {
             loginUsernameError.innerText = 'Błędna nazwa użytkownika';
@@ -83,9 +73,7 @@ const loginWithEmail = (e) => {
     e.preventDefault();
     if (proceedWithEmail) {
         const emailIndexLocalStorage = registeredUsers.findIndex(mail => mail.email == userLogin.value.toLowerCase());
-        console.log(`index tego maila to ${emailIndexLocalStorage}`);
         if (registeredUsers[emailIndexLocalStorage].password == passwordLogin.value) {
-            console.log('poprawne logowanie')
             window.location.href = "../content/content.html";
             userLogin.value = "";
             passwordLogin.value = "";
@@ -115,7 +103,6 @@ const loginWithUsername = (e) => {
     if (proceedWithUsername) {
         userIndexLocalStorage = registeredUsers.findIndex(name => name.username == userLogin.value);
         if (registeredUsers[userIndexLocalStorage].password == passwordLogin.value) {
-            console.log('poprawne logowanie')
             window.location.href = "../content/content.html";
 
             // add user to session storage

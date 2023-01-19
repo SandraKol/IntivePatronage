@@ -5,15 +5,12 @@ const preventUnloggedUser = () => {
     }
 }
 preventUnloggedUser();
-console.log(sessionStorage.length);
 
 // get name of the logged user
 if (sessionStorage.getItem('user') != null) {
     const loggedNameJson = sessionStorage.getItem('user');
     const loggedUser = JSON.parse(loggedNameJson);
-    console.log(loggedUser);
     const loggedUsername = loggedUser.login;
-    console.log(loggedUsername);
 
     const p = document.getElementById('LoggedUsername');
     p.textContent = `Witaj, ${loggedUsername}`;
@@ -33,7 +30,6 @@ async function fillTable(apiURL, table) {
     const tableBody = table.querySelector('tbody');
     const response = await fetch(apiURL);
     let data = await response.json();
-    console.log(data.transactions[1].type);
 
     // clear the table
     tableHead.innerHTML = "<tr></tr>";
@@ -41,7 +37,6 @@ async function fillTable(apiURL, table) {
 
     // setting the headers:
     let headers = ['Data', 'Typ transakcji', 'Kwota', 'Saldo', 'Opis'];
-    console.log(headers);
     for (const headerText of headers) {
         const headerElement = document.createElement('th');
         headerElement.textContent = headerText;
@@ -53,7 +48,6 @@ async function fillTable(apiURL, table) {
         const obj = Object.entries(data.transactions[i]);
         const row = document.createElement('tr');
         for (const [key, value] of obj) {
-            console.log(key, value);
             const cell = document.createElement('td');
             if (key === 'type') {
                 cell.innerHTML = iconMap.get(value);
@@ -64,8 +58,6 @@ async function fillTable(apiURL, table) {
         }
         tableBody.appendChild(row);
     }
-
-    const icon2 = document.getElementById("transaction-2");
 
 }
 
@@ -167,10 +159,7 @@ async function getApiData() {
     const countTypes = {};
     transactionData.forEach((type) => { countTypes[type] = (countTypes[type] || 0) + 1; });
 
-    console.log(countTypes);
-
     eachTypeCount = Object.values(countTypes);
-
 
     const transactionNames = Object.values(ChartData.transacationTypes);
     transactionTypeNames = transactionNames;

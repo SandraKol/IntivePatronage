@@ -23,7 +23,6 @@ for (let i = 0; i < localStorage.length; i++) {
     let value = JSON.parse(localStorage.getItem(key));
     registeredUsers.push(value);
 }
-console.log(registeredUsers);
 //--------------> chceck if username already exists in local storage (gets the index)
 
 function checkUsernameAvailability(login) {
@@ -35,10 +34,8 @@ function checkUsernameAvailability(login) {
 function ValidateEmail(input) {
     let validRegex = /^(([^<>()[\]\\.,;:\s@\"]+(\.[^<>()[\]\\.,;:\s@\"]+)*)|(\".+\"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/;
     if (input.match(validRegex)) {
-        console.log('this is email');
         return true;
     } else {
-        console.log('this must be login');
         return false;
     }
 }
@@ -84,7 +81,6 @@ const usernamesignupValidation = (e) => {
         username.classList.add('wrong-input');
 
     }
-    console.log(checkUsernameAvailability(username));
 }
 // password signupValidation
 const passwordsignupValidation = (e) => {
@@ -160,8 +156,7 @@ const signupFunc = (e) => {
         }
         let jsonUser = JSON.stringify(User);
         localStorage.setItem(email.value.toLowerCase(), jsonUser); //converts a JavaScript value to a JSON string
-        console.log('dziala');
-        console.log(User);
+
 
         // go to the content page and add user to local storage
 
