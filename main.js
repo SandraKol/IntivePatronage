@@ -1,6 +1,6 @@
 const goToLogin = () => {
-    window.location.href = "/pages/login.html";
+    window.location.href = "login/login.html";
 }
 const goToSignup = () => {
-    window.location.href = "/pages/signup.html";
+    window.location.href = "signup/signup.html";
 }

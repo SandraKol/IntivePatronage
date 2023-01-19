@@ -86,7 +86,7 @@ const loginWithEmail = (e) => {
         console.log(`index tego maila to ${emailIndexLocalStorage}`);
         if (registeredUsers[emailIndexLocalStorage].password == passwordLogin.value) {
             console.log('poprawne logowanie')
-            window.location.href = "../pages/content.html";
+            window.location.href = "../content/content.html";
             userLogin.value = "";
             passwordLogin.value = "";
             // add user to session storage
@@ -116,7 +116,7 @@ const loginWithUsername = (e) => {
         userIndexLocalStorage = registeredUsers.findIndex(name => name.username == userLogin.value);
         if (registeredUsers[userIndexLocalStorage].password == passwordLogin.value) {
             console.log('poprawne logowanie')
-            window.location.href = "../pages/content.html";
+            window.location.href = "../content/content.html";
 
             // add user to session storage
             let loggedUser = {
@@ -157,5 +157,5 @@ passwordLogin.addEventListener('change', clearPasswordMessages);
 
 // signup button 
 const goToSignup = () => {
-    window.location.href = "/pages/signup.html";
+    window.location.href = "../signup/signup.html";
 }

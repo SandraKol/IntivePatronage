@@ -1,3 +1,12 @@
+// prevent from entering unlogged user
+const preventUnloggedUser = () => {
+    if (sessionStorage.getItem('user') == null) {
+        window.location.href = "../login/login.html";
+    }
+}
+preventUnloggedUser();
+console.log(sessionStorage.length);
+
 // get name of the logged user
 if (sessionStorage.getItem('user') != null) {
     const loggedNameJson = sessionStorage.getItem('user');
@@ -7,9 +16,17 @@ if (sessionStorage.getItem('user') != null) {
     console.log(loggedUsername);
 
     const p = document.getElementById('LoggedUsername');
-    p.textContent = `Welcome, ${loggedUsername}`;
+    p.textContent = `Witaj, ${loggedUsername}`;
 }
 
+// get icons (transaction types)
+const iconMap = new Map([
+    [1, '<i class="fa-sharp fa-solid fa-hand-holding-dollar"></i>'],
+    [2, '<i class="fa-sharp fa-solid fa-basket-shopping"></i>'],
+    [3, '<i class="fa-sharp fa-solid fa-file-invoice-dollar"></i>'],
+    [4, '<i class="fa-solid fa-gift"></i>'],
+
+]);
 // Fill table
 async function fillTable(apiURL, table) {
     const tableHead = table.querySelector('thead');
@@ -17,18 +34,6 @@ async function fillTable(apiURL, table) {
     const response = await fetch(apiURL);
     let data = await response.json();
     console.log(data.transactions[1].type);
-
-    // for (let i = 0; i < data.transactions.length; i++) {
-    //     data.transactions[i].type.replace('2', "two");
-    // }
-
-    // console.log(data.transactions);
-    // Object.keys(data.transactions).forEach((key) => {
-    //     if (data.transactions[key] == 'types'){
-
-    //     }
-
-    // });
 
     // clear the table
     tableHead.innerHTML = "<tr></tr>";
@@ -45,11 +50,16 @@ async function fillTable(apiURL, table) {
 
     // populate table with content
     for (let i = 0; i < data.transactions.length; i++) {
-        const obj = Object.values(data.transactions[i]);
+        const obj = Object.entries(data.transactions[i]);
         const row = document.createElement('tr');
-        for (const cellValue of obj) {
+        for (const [key, value] of obj) {
+            console.log(key, value);
             const cell = document.createElement('td');
-            cell.textContent = cellValue;
+            if (key === 'type') {
+                cell.innerHTML = iconMap.get(value);
+            } else {
+                cell.textContent = value;
+            }
             row.appendChild(cell);
         }
         tableBody.appendChild(row);
@@ -79,11 +89,11 @@ async function transactionChart() {
         data: {
             labels: transactionTypeNames,
             datasets: [{
-                label: 'Typ transakcji',
+                label: 'Ilość transakcji',
                 data: eachTypeCount,
                 borderWidth: 1,
                 backgroundColor: ["#9FFB88", "#FA8072", "#FDE456", "#660066"],
-                color: 'white',
+                color: 'black',
             }]
         },
         options: {
@@ -91,7 +101,7 @@ async function transactionChart() {
             plugins: {
                 legend: {
                     labels: {
-                        color: 'white'
+                        color: 'black'
                     }
                 }
             }
@@ -115,23 +125,23 @@ async function balanceChart() {
                 data: balanceLabel,
                 borderWidth: 1,
                 backgroundColor: ["#CDEBA7", "#FFFFD2", "#E61C66", "#FF7F50", "#DC143C", "#C6CECE", "#4B0082"],
-                color: 'white',
+                color: 'black',
             }]
         },
         options: {
             responsive: true,
             scales: {
                 y: {
-                    ticks: { color: 'white', beginAtZero: true }
+                    ticks: { color: 'black', beginAtZero: true }
                 },
                 x: {
-                    ticks: { color: 'white', beginAtZero: false }
+                    ticks: { color: 'black', beginAtZero: false }
                 }
             },
             plugins: {
                 legend: {
                     labels: {
-                        color: 'white'
+                        color: 'black'
                     }
                 }
             }
@@ -157,7 +167,10 @@ async function getApiData() {
     const countTypes = {};
     transactionData.forEach((type) => { countTypes[type] = (countTypes[type] || 0) + 1; });
 
+    console.log(countTypes);
+
     eachTypeCount = Object.values(countTypes);
+
 
     const transactionNames = Object.values(ChartData.transacationTypes);
     transactionTypeNames = transactionNames;
@@ -168,5 +181,5 @@ async function getApiData() {
 
 const logout = () => {
     sessionStorage.clear()
-    window.location.href = "/pages/login.html";
+    window.location.href = "../login/login.html";
 }

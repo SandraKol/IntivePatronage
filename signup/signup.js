@@ -162,15 +162,30 @@ const signupFunc = (e) => {
         localStorage.setItem(email.value.toLowerCase(), jsonUser); //converts a JavaScript value to a JSON string
         console.log('dziala');
         console.log(User);
+
+        // go to the content page and add user to local storage
+
+        window.location.href = "../content/content.html";
+
+        // add user to session storage
+        let loggedUser = {
+            email: email.value,
+            login: username.value,
+            password: password.value,
+        }
+        let jsonLoggedUser = JSON.stringify(loggedUser);
+        sessionStorage.setItem('user', jsonLoggedUser);
+
         username.value = "";
         password.value = "";
         email.value = "";
         email2.value = "";
+
     }
 }
 formSignup.addEventListener('submit', signupFunc);
 
 // login button
 const goToLogin = () => {
-    window.location.href = "/pages/login.html";
+    window.location.href = "../login/login.html";
 }
